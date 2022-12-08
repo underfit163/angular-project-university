@@ -1,0 +1,42 @@
+.mat-toolbar {
+  background-color: cornflowerblue;
+  color: white;
+  min-height: 80px;
+}
+
+.mat-button {
+  color: white;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-text {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.active {
+  font-weight: bold;
+  background-color: #0f34ef;
+}
+
+.active:active {
+  font-weight: bold;
+  background-color: #0f34ef;
+}
+
+.univ-link {
+  color: white;
+  text-decoration: none;
+}
+
