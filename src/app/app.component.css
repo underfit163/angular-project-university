@@ -1,3 +1,14 @@
+.wrapper{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.container-fluid{
+  flex: 1 0 auto;
+  margin-bottom: 10px;
+}
+
 .mat-toolbar {
   background-color: cornflowerblue;
   color: white;
@@ -13,10 +24,7 @@
 }
 
 .footer {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  flex: 0 0 auto;
 }
 
 .footer-text {

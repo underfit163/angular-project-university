@@ -1,0 +1,17 @@
+
+
+<ng-template #loggedOut>
+  Please login.
+</ng-template>
+
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar class="header-image"></div>
+    <mat-card-title>Профиль пользователя: {{currentUser.login}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="http://s.4pda.to/6S3YAASRz2gac7eXlmWlF2Dvz1GDz2G.jpg" alt="Фото пользователя">
+  <mat-card-content>
+    <mat-card-title>Почта пользователя: {{currentUser.email}}</mat-card-title>
+    <mat-card-title>Роль пользователя: {{currentUser.role}}</mat-card-title>
+  </mat-card-content>
+</mat-card>

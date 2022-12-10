@@ -1,4 +1,4 @@
-<div id="app">
+<div id="app" class="wrapper">
   <mat-toolbar color="primary" class="navbar">
   <span>
     <a href="/" class="univ-link">Университет</a>
@@ -15,7 +15,7 @@
       <a mat-button routerLink="/register" routerLinkActive="active">Регистрация</a>
     </div>
     <div *ngIf="isLoggedIn">
-      <a mat-button routerLink="/profile" routerLinkActive="active">{{ login }}</a>
+      <a mat-button routerLink="/profile" routerLinkActive="active">Профиль</a>
       <a mat-button href (click)="logout()" routerLinkActive="active">Выйти</a>
     </div>
   </mat-toolbar>

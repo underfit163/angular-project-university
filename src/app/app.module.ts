@@ -4,7 +4,7 @@ import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {RouterModule, Routes} from "@angular/router";
 import {StudentComponent} from './student/student.component';
@@ -17,6 +17,13 @@ import { registerLocaleData } from '@angular/common';
 import ru from '@angular/common/locales/ru';
 import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatInputModule} from "@angular/material/input";
+import {MatIconModule} from "@angular/material/icon";
+import {MatCardModule} from "@angular/material/card";
+import {MatTableModule} from "@angular/material/table";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import {MatSortModule} from "@angular/material/sort";
 
 registerLocaleData(ru);
 
@@ -51,6 +58,14 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     MatButtonModule,
     MatToolbarModule,
+    MatInputModule,
+    MatIconModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [httpInterceptorProviders],//классы, создающие сервисы, используемые модулем
   bootstrap: [AppComponent]//корневой компонент, который вызывается по умолчанию при загрузке приложения

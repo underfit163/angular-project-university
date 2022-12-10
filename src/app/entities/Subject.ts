@@ -1,5 +1,4 @@
-export class Subject {
-  constructor(public id: number,
-              public name: string) {
-  }
+export interface Subject {
+  id: number,
+  subjectname: string
 }
