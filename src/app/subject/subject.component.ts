@@ -15,26 +15,18 @@ import {MatSort} from "@angular/material/sort";
 export class SubjectComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['select', 'subjectname'];
   dataSource: MatTableDataSource<Subject> = new MatTableDataSource<Subject>();
-
-  selection = new SelectionModel<Subject>(false, []);
-  role: string | undefined;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  selection = new SelectionModel<Subject>(false, []);
+
+  role: string | undefined;
 
   constructor(private subjectService: SubjectService, private tokenStorage: TokenStorageService) {
   }
 
   ngOnInit(): void {
     this.role = this.tokenStorage.getUser().role;
-    this.subjectService.getSubjects().subscribe({
-      next: data => {
-        this.dataSource.data = data;
-      },
-      error: err => {
-        alert(err.message);
-        return [];
-      }
-    });
+    this.getAllData();
   }
 
   ngAfterViewInit() {
@@ -56,6 +48,21 @@ export class SubjectComponent implements OnInit, AfterViewInit {
     return `${this.selection.isSelected(<Subject>row) ? 'deselect' : 'select'}`;
   }
 
+  //---------------------------------------------------
+
+  getAllData() {
+    this.subjectService.getSubjects()
+      .subscribe({
+        next: data => {
+          this.dataSource.data = data;
+        },
+        error: err => {
+          alert(err.message);
+          return [];
+        }
+      });
+  }
+
   addData() {
     console.log(this.selection.selected[0])
   }
@@ -65,7 +72,15 @@ export class SubjectComponent implements OnInit, AfterViewInit {
   }
 
   deleteData() {
-    console.log(this.dataSource.data)
     console.log(this.selection.selected[0]?.id)
+    if (this.selection.selected[0]) this.subjectService.deleteSubject(this.selection.selected[0].id).subscribe({
+      next: _ => {
+        alert("Успешное удаление!");
+        this.getAllData();
+      },
+      error: err => {
+        alert("Ошибка удаления: " + err.message);
+      }
+    });
   }
 }

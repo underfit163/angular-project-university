@@ -1,15 +1,15 @@
 <div class="container">
-  <div class="button-container">
+  <div class="button-container" *ngIf="role?.toUpperCase()==='ROLE_ADMIN'">
     <button mat-raised-button color="primary"
             [disabled]="!dataSource.data.length" (click)="addData()" class="table-button">
       Добавить
     </button>
     <button mat-raised-button color="accent"
-            [disabled]="!dataSource.data.length" (click)="updateData()" class="table-button">
+            [disabled]="selection.isEmpty() || !dataSource.data.length" (click)="updateData()" class="table-button">
       Изменить
     </button>
     <button mat-raised-button color="warn"
-            [disabled]="!dataSource.data.length" (click)="deleteData()" class="table-button">
+            [disabled]="selection.isEmpty() || !dataSource.data.length" (click)="deleteData()" class="table-button">
       Удалить
     </button>
   </div>
