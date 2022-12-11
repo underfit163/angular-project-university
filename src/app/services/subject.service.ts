@@ -32,5 +32,4 @@ export class SubjectService {
   deleteSubject(id: number | string) {
     return this.http.delete<Subject>(this.url + '/' + id);
   }
-
 }

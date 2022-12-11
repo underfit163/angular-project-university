@@ -24,6 +24,8 @@ import {MatTableModule} from "@angular/material/table";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
+import { DialogComponent } from './subject/dialog/dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 registerLocaleData(ru);
 
@@ -48,25 +50,27 @@ const appRoutes: Routes = [
     StudentComponent,
     SubjectComponent,
     TeacherComponent,
-    ProfileComponent
+    ProfileComponent,
+    DialogComponent
   ],
-  imports: [//другие модули, классы которых необходимы для шаблонов компонентов из текущего модуля
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule.forRoot(appRoutes),
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatInputModule,
-    MatIconModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatPaginatorModule,
-    MatSortModule,
-  ],
+    imports: [//другие модули, классы которых необходимы для шаблонов компонентов из текущего модуля
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule.forRoot(appRoutes),
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatInputModule,
+        MatIconModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        MatCheckboxModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatDialogModule,
+    ],
   providers: [httpInterceptorProviders],//классы, создающие сервисы, используемые модулем
   bootstrap: [AppComponent]//корневой компонент, который вызывается по умолчанию при загрузке приложения
 })

@@ -6,6 +6,8 @@ import {SubjectService} from "../services/subject.service";
 import {TokenStorageService} from "../services/token-storage.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogComponent} from "./dialog/dialog.component";
 
 @Component({
   selector: 'app-subject',
@@ -21,7 +23,7 @@ export class SubjectComponent implements OnInit, AfterViewInit {
 
   role: string | undefined;
 
-  constructor(private subjectService: SubjectService, private tokenStorage: TokenStorageService) {
+  constructor(public dialog: MatDialog, private subjectService: SubjectService, private tokenStorage: TokenStorageService) {
   }
 
   ngOnInit(): void {
@@ -63,20 +65,27 @@ export class SubjectComponent implements OnInit, AfterViewInit {
       });
   }
 
-  addData() {
-    console.log(this.selection.selected[0])
+  openAddDataDialog() {
+    this.dialog.open(DialogComponent).afterClosed().subscribe(() => {
+      this.getAllData();
+    });
   }
 
-  updateData() {
-    console.log(this.selection.selected[0])
+  openUpdateDataDialog() {
+    this.dialog.open(DialogComponent, {
+      data: this.selection.selected[0]
+    }).afterClosed().subscribe(() => {
+      this.getAllData();
+      this.selection.clear();
+    });
   }
 
-  deleteData() {
-    console.log(this.selection.selected[0]?.id)
-    if (this.selection.selected[0]) this.subjectService.deleteSubject(this.selection.selected[0].id).subscribe({
-      next: _ => {
+  openDeleteDataDialog() {
+    this.subjectService.deleteSubject(this.selection.selected[0]?.id).subscribe({
+      next: () => {
         alert("Успешное удаление!");
         this.getAllData();
+        this.selection.clear();
       },
       error: err => {
         alert("Ошибка удаления: " + err.message);
