@@ -6,15 +6,16 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+  templateUrl: './subject-dialog.component.html',
+  styleUrls: ['./subject-dialog.component.css']
 })
-export class DialogComponent implements OnInit {
+export class SubjectDialogComponent implements OnInit {
   form: FormGroup;
   actionBtn: string = "Добавить";
+  submitClick: boolean = false;
 
   constructor(
-    public dialogRef: MatDialogRef<DialogComponent>,
+    public dialogRef: MatDialogRef<SubjectDialogComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public editData: Subject,
     private subjectService: SubjectService) {
@@ -42,8 +43,12 @@ export class DialogComponent implements OnInit {
     this.subjectService.createSubject(this.form.value).subscribe({
       next: () => {
         alert("Запись успешно добавлена!");
+
+        this.submitClick = true;
+
         //this.form.reset();
         //this.dialogRef.close("save");
+
       },
       error: err => {
         alert("Ошибка добавления записи! " + err.message);
@@ -56,6 +61,7 @@ export class DialogComponent implements OnInit {
       {
         next: () => {
           alert("Запись успешно обновлена!");
+          this.submitClick = true;
           //this.form.reset();
           //this.dialogRef.close("update");
         },
@@ -65,4 +71,7 @@ export class DialogComponent implements OnInit {
       });
   }
 
+  onClose() {
+    this.dialogRef.close(this.submitClick);
+  }
 }

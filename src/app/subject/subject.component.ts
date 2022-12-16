@@ -7,7 +7,7 @@ import {TokenStorageService} from "../services/token-storage.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatDialog} from "@angular/material/dialog";
-import {DialogComponent} from "./dialog/dialog.component";
+import {SubjectDialogComponent} from "./subject-dialog/subject-dialog.component";
 
 @Component({
   selector: 'app-subject',
@@ -66,17 +66,21 @@ export class SubjectComponent implements OnInit, AfterViewInit {
   }
 
   openAddDataDialog() {
-    this.dialog.open(DialogComponent).afterClosed().subscribe(() => {
-      this.getAllData();
+    this.dialog.open(SubjectDialogComponent).afterClosed().subscribe((data) => {
+      if (data) {
+        this.getAllData();
+      }
     });
   }
 
   openUpdateDataDialog() {
-    this.dialog.open(DialogComponent, {
+    this.dialog.open(SubjectDialogComponent, {
       data: this.selection.selected[0]
-    }).afterClosed().subscribe(() => {
-      this.getAllData();
-      this.selection.clear();
+    }).afterClosed().subscribe(data => {
+      if (data) {
+        this.getAllData();
+        this.selection.clear();
+      }
     });
   }
 

@@ -24,8 +24,15 @@ import {MatTableModule} from "@angular/material/table";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSortModule} from "@angular/material/sort";
-import { DialogComponent } from './subject/dialog/dialog.component';
+import { SubjectDialogComponent } from './subject/subject-dialog/subject-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {StudentDialogComponent} from "./student/student-dialog/student-dialog.component";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatSelectModule} from "@angular/material/select";
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
+import {MY_DATE_FORMATS} from "./helpers/my-date-formats";
+import {MomentDateAdapter} from "@angular/material-moment-adapter";
+import { TeacherDialogComponent } from './teacher/teacher-dialog/teacher-dialog.component';
 
 registerLocaleData(ru);
 
@@ -51,27 +58,35 @@ const appRoutes: Routes = [
     SubjectComponent,
     TeacherComponent,
     ProfileComponent,
-    DialogComponent
+    SubjectDialogComponent,
+    StudentDialogComponent,
+    TeacherDialogComponent
   ],
-    imports: [//другие модули, классы которых необходимы для шаблонов компонентов из текущего модуля
-        BrowserModule,
-        FormsModule,
-        HttpClientModule,
-        RouterModule.forRoot(appRoutes),
-        BrowserAnimationsModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatInputModule,
-        MatIconModule,
-        MatCardModule,
-        ReactiveFormsModule,
-        MatTableModule,
-        MatCheckboxModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatDialogModule,
-    ],
-  providers: [httpInterceptorProviders],//классы, создающие сервисы, используемые модулем
+  imports: [//другие модули, классы которых необходимы для шаблонов компонентов из текущего модуля
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatInputModule,
+    MatIconModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatNativeDateModule
+  ],
+  providers: [httpInterceptorProviders,
+    {provide: MAT_DATE_LOCALE, useValue: 'ru'},
+    {provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]}],//классы, создающие сервисы, используемые модулем
   bootstrap: [AppComponent]//корневой компонент, который вызывается по умолчанию при загрузке приложения
 })
 export class AppModule {
