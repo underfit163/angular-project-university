@@ -16,7 +16,7 @@ export class SubjectService {
   }
 
   getSubject(id: number | string) {
-    return this.http.get<Array<Subject>>(this.url + '/' + id);
+    return this.http.get<Subject>(this.url + '/' + id);
   }
 
   createSubject(subject: Subject) {

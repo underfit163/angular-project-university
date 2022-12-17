@@ -3,12 +3,12 @@
   <form #f="ngForm" [formGroup]="form" autocomplete="off">
     <mat-form-field appearance="outline">
       <mat-label>ФИО</mat-label>
-      <input matInput type="fio" formControlName="fio" placeholder="Поле ввода...">
+      <input matInput type="text" formControlName="fio" placeholder="Поле ввода...">
       <mat-error *ngIf="form.controls['fio'].errors?.['required']">Заполнение обязательно!</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Выберите дату</mat-label>
-      <input matInput [matDatepicker]="picker" [max]="maxDate"  formControlName="birthday">
+      <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="birthday">
       <mat-hint>ДД/ММ/ГГГГ</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
@@ -21,11 +21,10 @@
         <mat-option value="м">Мужской</mat-option>
         <mat-option value="ж">Женский</mat-option>
       </mat-select>
-      <mat-error *ngIf="form.controls['gender'].errors?.['required']">Заполнение обязательно!</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Телефон</mat-label>
-      <input matInput type="phone" formControlName="phone" placeholder="Поле ввода...">
+      <input matInput type="tel" formControlName="phone" placeholder="Поле ввода...">
       <mat-error *ngIf="form.controls['phone'].errors?.['minlength']">
         Введите минимум 6 символов
       </mat-error>

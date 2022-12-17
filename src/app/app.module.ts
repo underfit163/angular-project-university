@@ -33,6 +33,10 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule} fro
 import {MY_DATE_FORMATS} from "./helpers/my-date-formats";
 import {MomentDateAdapter} from "@angular/material-moment-adapter";
 import { TeacherDialogComponent } from './teacher/teacher-dialog/teacher-dialog.component';
+import { ExamComponent } from './exam/exam.component';
+import { ExamDialogComponent } from './exam/exam-dialog/exam-dialog.component';
+import { SubjectPipePipe } from './exam/pipes/subject-pipe.pipe';
+import { TeacherPipePipe } from './exam/pipes/teacher-pipe.pipe';
 
 registerLocaleData(ru);
 
@@ -45,6 +49,7 @@ const appRoutes: Routes = [
   {path: 'subject', component: SubjectComponent},
   {path: 'student', component: StudentComponent},
   {path: 'teacher', component: TeacherComponent},
+  {path: 'exam', component: ExamComponent},
   {path: '**', redirectTo: '/'}
 ];
 
@@ -60,7 +65,11 @@ const appRoutes: Routes = [
     ProfileComponent,
     SubjectDialogComponent,
     StudentDialogComponent,
-    TeacherDialogComponent
+    TeacherDialogComponent,
+    ExamComponent,
+    ExamDialogComponent,
+    SubjectPipePipe,
+    TeacherPipePipe
   ],
   imports: [//другие модули, классы которых необходимы для шаблонов компонентов из текущего модуля
     BrowserModule,

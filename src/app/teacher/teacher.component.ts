@@ -53,7 +53,6 @@ export class TeacherComponent implements OnInit, AfterViewInit {
   }
 
   //---------------------------------------------------
-
   getAllData() {
     this.teacherService.getTeachers()
       .subscribe({

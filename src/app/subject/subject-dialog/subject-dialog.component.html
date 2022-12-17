@@ -3,7 +3,7 @@
   <form #f="ngForm" [formGroup]="form" autocomplete="off">
     <mat-form-field appearance="outline">
       <mat-label>Название предмета</mat-label>
-      <input matInput type="subjectname" formControlName="subjectname" placeholder="Поле ввода...">
+      <input matInput type="text" formControlName="subjectname" placeholder="Поле ввода...">
       <mat-error *ngIf="form.controls['subjectname'].errors?.['required']">Заполнение обязательно!</mat-error>
     </mat-form-field>
   </form>

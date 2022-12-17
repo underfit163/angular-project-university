@@ -17,7 +17,7 @@ export class TeacherService {
   }
 
   getTeacher(id: number | string) {
-    return this.http.get<Array<Teacher>>(this.url + '/' + id);
+    return this.http.get<Teacher>(this.url + '/' + id);
   }
 
   createTeacher(teacher: Teacher) {

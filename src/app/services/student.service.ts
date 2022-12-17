@@ -17,7 +17,7 @@ export class StudentService {
   }
 
   getStudent(id: number | string) {
-    return this.http.get<Array<Student>>(this.url + '/' + id);
+    return this.http.get<Student>(this.url + '/' + id);
   }
 
   createStudent(student: Student) {

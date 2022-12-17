@@ -1,7 +1,6 @@
 <div class="container">
   <div class="button-container" *ngIf="role?.toUpperCase()==='ROLE_ADMIN'">
-    <button mat-raised-button color="primary"
-            [disabled]="!dataSource.data.length" (click)="openAddDataDialog()" class="table-button">
+    <button mat-raised-button color="primary" (click)="openAddDataDialog()" class="table-button">
       Добавить
     </button>
     <button mat-raised-button color="accent"
