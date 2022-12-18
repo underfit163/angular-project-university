@@ -37,6 +37,9 @@ import { ExamComponent } from './exam/exam.component';
 import { ExamDialogComponent } from './exam/exam-dialog/exam-dialog.component';
 import { SubjectPipePipe } from './exam/pipes/subject-pipe.pipe';
 import { TeacherPipePipe } from './exam/pipes/teacher-pipe.pipe';
+import { MarkComponent } from './mark/mark.component';
+import { MarkDialogComponent } from './mark/mark-dialog/mark-dialog.component';
+import { StudentPipePipe } from './mark/pipes/student-pipe.pipe';
 
 registerLocaleData(ru);
 
@@ -69,7 +72,10 @@ const appRoutes: Routes = [
     ExamComponent,
     ExamDialogComponent,
     SubjectPipePipe,
-    TeacherPipePipe
+    TeacherPipePipe,
+    MarkComponent,
+    MarkDialogComponent,
+    StudentPipePipe
   ],
   imports: [//другие модули, классы которых необходимы для шаблонов компонентов из текущего модуля
     BrowserModule,

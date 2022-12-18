@@ -1,17 +1,23 @@
 <div class="container">
-  <div class="button-container" *ngIf="role?.toUpperCase()==='ROLE_ADMIN'">
-    <button mat-raised-button color="primary" (click)="openAddDataDialog()" class="table-button">
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="openAddDataDialog()"
+            class="table-button" *ngIf="role?.toUpperCase()==='ROLE_ADMIN'">
       Добавить
     </button>
     <button mat-raised-button color="accent"
             [disabled]="selection.isEmpty() || !dataSource.data.length" (click)="openUpdateDataDialog()"
-            class="table-button">
+            class="table-button" *ngIf="role?.toUpperCase()==='ROLE_ADMIN'">
       Изменить
     </button>
     <button mat-raised-button color="warn"
             [disabled]="selection.isEmpty() || !dataSource.data.length" (click)="openDeleteDataDialog()"
-            class="table-button">
+            class="table-button" *ngIf="role?.toUpperCase()==='ROLE_ADMIN'">
       Удалить
+    </button>
+    <button mat-raised-button color="basic"
+            [disabled]="selection.isEmpty() || !dataSource.data.length" (click)="openMarksDataDialog()"
+            class="table-button">
+      Посмотреть оценки
     </button>
   </div>
   <mat-form-field>

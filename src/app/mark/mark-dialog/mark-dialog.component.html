@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>{{actionBtn}} запись</h1>
+<div mat-dialog-content>
+  <form #f="ngForm" [formGroup]="form" autocomplete="off">
+    <mat-form-field appearance="outline">
+      <mat-label>Оценка</mat-label>
+      <mat-select formControlName="evaluation">
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="4">4</mat-option>
+        <mat-option value="5">5</mat-option>
+        <mat-option value="Зачет">Зачет</mat-option>
+        <mat-option value="Незачет">Незачет</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['evaluation'].errors?.['required']">Выбрать обязательно!</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Дата сдачи</mat-label>
+      <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="passdate">
+      <mat-hint>ДД/ММ/ГГГГ</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.controls['passdate'].errors?.['required']">Заполнение обязательно!</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Студент</mat-label>
+      <mat-select formControlName="studentidfk">
+        <mat-option></mat-option>
+        <mat-option *ngFor="let student of students" [value]="student.id">
+          {{student.fio}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.controls['studentidfk'].errors?.['required']">Выбрать обязательно!</mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-raised-button color="warn" (click)="onClose()" mat-dialog-close>Закрыть</button>
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSubmit()">{{actionBtn}}</button>
+</div>

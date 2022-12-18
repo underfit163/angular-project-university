@@ -12,6 +12,7 @@ import {ExamService} from "../services/exam.service";
 import {ExamDialogComponent} from "./exam-dialog/exam-dialog.component";
 import {SubjectService} from "../services/subject.service";
 import {Subject} from "../entities/Subject";
+import {MarkComponent} from "../mark/mark.component";
 
 @Component({
   selector: 'app-exam',
@@ -44,8 +45,18 @@ export class ExamComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      switch (property) {
+        case 'subjectidfk':
+          return this.subjects?.find(subject => subject.id == item.subjectidfk)?.subjectname;
+        case 'teacheridfk':
+          return this.teachers?.find(teacher => teacher.id == item.teacheridfk)?.fio;
+        default: // @ts-ignore
+          return item[property];
+      }
+    };
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
   applyFilter(event: Event) {
@@ -138,6 +149,12 @@ export class ExamComponent implements OnInit, AfterViewInit {
       error: err => {
         alert("Ошибка удаления: " + err.message);
       }
+    });
+  }
+
+  openMarksDataDialog() {
+    this.dialog.open(MarkComponent, {
+      data: this.selection.selected[0]?.id
     });
   }
 }

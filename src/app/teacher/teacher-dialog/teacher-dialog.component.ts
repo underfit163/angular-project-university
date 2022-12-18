@@ -33,7 +33,6 @@ export class TeacherDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.editData) {
-      console.log(this.editData)
       this.actionBtn = "Изменить";
       this.form.controls["fio"].setValue(this.editData.fio);
       this.form.controls["birthday"].setValue(this.editData.birthday);
