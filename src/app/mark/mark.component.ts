@@ -10,7 +10,7 @@ import {Student} from "../entities/Student";
 import {MarkService} from "../services/mark.service";
 import {StudentService} from "../services/student.service";
 import {MarkDialogComponent} from "./mark-dialog/mark-dialog.component";
-import {parseStringToDate} from "../helpers/help-functions";
+import {parseDateToString, parseStringToDate} from "../helpers/help-functions";
 
 @Component({
   selector: 'app-mark',
@@ -41,6 +41,18 @@ export class MarkComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.dataSource.filterPredicate = (record, filter) => {
+      const dataStr = Object.keys(record)
+        .reduce((currentTerm: string, key: string) => {
+          let element;
+          if (key === 'studentidfk') element = this.getStudentNameById((record as { [key: string]: any })[key]);
+          else if (key === 'passdate') element = parseDateToString((record as { [key: string]: any })[key]);
+          else element = (record as { [key: string]: any })[key];
+          return currentTerm + element + '◬';
+        }, '').toLowerCase();
+      const transformedFilter = filter.trim().toLowerCase();
+      return dataStr.indexOf(transformedFilter) != -1;
+    }
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch (property) {
         case 'studentidfk':
@@ -68,6 +80,10 @@ export class MarkComponent implements OnInit, AfterViewInit {
   }
 
   //---------------------------------------------------
+  getStudentNameById(id: number) {
+    return this.students?.find(student => student.id == id)?.fio;
+  }
+
   getAllStudents() {
     this.studentService.getStudents().subscribe({
       next: data => {

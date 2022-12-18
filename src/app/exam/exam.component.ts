@@ -45,12 +45,24 @@ export class ExamComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.dataSource.filterPredicate = (record, filter) => {
+      const dataStr = Object.keys(record)
+        .reduce((currentTerm: string, key: string) => {
+          let element;
+          if (key === 'subjectidfk') element = this.getSubjectNameById((record as { [key: string]: any })[key]);
+          else if (key === 'teacheridfk') element = this.getTeacherNameById((record as { [key: string]: any })[key]);
+          else element = (record as { [key: string]: any })[key];
+          return currentTerm + element + '◬';
+        }, '').toLowerCase();
+      const transformedFilter = filter.trim().toLowerCase();
+      return dataStr.indexOf(transformedFilter) != -1;
+    }
     this.dataSource.sortingDataAccessor = (item, property) => {
       switch (property) {
         case 'subjectidfk':
-          return this.subjects?.find(subject => subject.id == item.subjectidfk)?.subjectname;
+          return this.getTeacherNameById(item.subjectidfk);
         case 'teacheridfk':
-          return this.teachers?.find(teacher => teacher.id == item.teacheridfk)?.fio;
+          return this.getTeacherNameById(item.teacheridfk);
         default: // @ts-ignore
           return item[property];
       }
@@ -74,6 +86,14 @@ export class ExamComponent implements OnInit, AfterViewInit {
   }
 
   //---------------------------------------------------
+  getSubjectNameById(id: number) {
+    return this.subjects?.find(subject => subject.id == id)?.subjectname;
+  }
+
+  getTeacherNameById(id: number) {
+    return this.teachers?.find(teacher => teacher.id == id)?.fio;
+  }
+
   getAllSubjects() {
     this.subjectService.getSubjects().subscribe({
       next: data => {

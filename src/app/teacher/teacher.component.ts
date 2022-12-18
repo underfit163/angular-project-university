@@ -7,7 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {TokenStorageService} from "../services/token-storage.service";
 import {Teacher} from "../entities/Teacher";
 import {TeacherService} from "../services/teacher.service";
-import {parseStringToDate} from "../helpers/help-functions";
+import {parseDateToString, parseStringToDate} from "../helpers/help-functions";
 import {TeacherDialogComponent} from "./teacher-dialog/teacher-dialog.component";
 
 @Component({
@@ -34,6 +34,17 @@ export class TeacherComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.dataSource.filterPredicate = (record, filter) => {
+      const dataStr = Object.keys(record)
+        .reduce((currentTerm: string, key: string) => {
+          let element;
+          if (key === 'birthday') element = parseDateToString((record as { [key: string]: any })[key]);
+          else element = (record as { [key: string]: any })[key];
+          return currentTerm + element + '◬';
+        }, '').toLowerCase();
+      const transformedFilter = filter.trim().toLowerCase();
+      return dataStr.indexOf(transformedFilter) != -1;
+    }
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
