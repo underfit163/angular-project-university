@@ -9,9 +9,9 @@
     <mat-card-title>Вы попали на страницу университета!</mat-card-title>
     <mat-card-title *ngIf="currentUser.role">Так как ваша роль: {{currentUser.role}}.</mat-card-title>
     <mat-card-title *ngIf="!currentUser.role">Здесь вы сможете просматривать и выставлять оценки студентам по предметам в период сессии.</mat-card-title>
-    <mat-card-title *ngIf="currentUser.role.toUpperCase()==='ROLE_ADMIN'">Вам разрешено делать все что вам пожелается:
+    <mat-card-title *ngIf="currentUser.role?.toUpperCase()==='ROLE_ADMIN'">Вам разрешено делать все что вам пожелается:
       добавлять, изменять и удалять все записи.</mat-card-title>
-    <mat-card-title *ngIf="currentUser.role.toUpperCase()==='ROLE_USER'">Вам разрешено только просматривать
+    <mat-card-title *ngIf="currentUser.role?.toUpperCase()==='ROLE_USER'">Вам разрешено только просматривать
       информацию о внесенных записях.</mat-card-title>
   </mat-card-content>
 </mat-card>

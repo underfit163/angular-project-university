@@ -13,7 +13,9 @@ export class AppComponent implements OnInit {
   showUserBoard = false;
   login?: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(private tokenStorageService: TokenStorageService) {
+    //window["apiUrl"] = environment.production? "": "http://localhost:8080";
+  }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
